@@ -1,0 +1,16 @@
+substitutions:
+    _MY_GOLANG_VERSION: "1.0"
+  steps:
+  - id: "Build da imagem"
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/my_golang:latest', '-t', 'gcr.io/$PROJECT_ID/my_golang:${_MY_GOLANG_VERSION}', '.']
+  
+  - id: "Rodando o teste da função soma"
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['run', '-t', '--name', 'my_golang', 'gcr.io/$PROJECT_ID/my_golang:latest', 'go', 'test']
+  
+  
+  images:
+  - 'gcr.io/$PROJECT_ID/my_golang:latest'
+  - 'gcr.io/$PROJECT_ID/my_golang:${_MY_GOLANG_VERSION}'
+  tags: ['cloud-builders-desafio-ci-golang']

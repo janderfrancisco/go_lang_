@@ -5,10 +5,12 @@ ENV GOOS=linux \
     GOARCH=amd64
 
 # Move to working directory /build
-WORKDIR /build
+#WORKDIR /build
 
 # Copy the code into the container
 COPY . .
+WORKDIR /go/src/app
+
 
 # Build the application
 # RUN go build -o main .
